@@ -18,16 +18,36 @@ const Contact = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission
-    console.log('Form submitted:', formData);
-    // Reset form
-    setFormData({
-      name: '',
-      email: '',
-      phone: '',
-      studentAge: '',
-      instrument: '',
-      message: ''
+    
+    // Create form data for Formspree
+    const form = e.target as HTMLFormElement;
+    const formData = new FormData(form);
+    
+    // Submit to Formspree
+    fetch('https://formspree.io/f/xeovqnpy', {
+      method: 'POST',
+      body: formData,
+      headers: {
+        'Accept': 'application/json'
+      }
+    }).then(response => {
+      if (response.ok) {
+        // Reset form on success
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          studentAge: '',
+          instrument: '',
+          message: ''
+        });
+        alert('Thank you! Your message has been sent successfully. We will get back to you soon.');
+      } else {
+        alert('Oops! There was a problem submitting your form. Please try again or call us directly.');
+      }
+    }).catch(error => {
+      console.error('Form submission error:', error);
+      alert('Oops! There was a problem submitting your form. Please try again or call us directly.');
     });
   };
 
@@ -154,7 +174,7 @@ const Contact = () => {
           <div>
             <div className="bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl p-8 shadow-lg transform hover:scale-105 transition-transform duration-300">
               <h3 className="text-2xl font-bold text-gray-900 mb-6">Leave a message for a callback</h3>
-              <form onSubmit={handleSubmit} className="space-y-4">
+              <form onSubmit={handleSubmit} className="space-y-4" action="https://formspree.io/f/xeovqnpy" method="POST">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -202,7 +222,7 @@ const Contact = () => {
                       Student Age *
                     </label>
                     <select
-                      name="studentAge"
+                      name="student_age"
                       value={formData.studentAge}
                       onChange={handleChange}
                       required
@@ -252,6 +272,9 @@ const Contact = () => {
                     placeholder="Tell us about your child's musical interests and any questions you have..."
                   />
                 </div>
+                {/* Hidden field for Formspree */}
+                <input type="hidden" name="_subject" value="New inquiry from Arvi Homeschool website" />
+                <input type="hidden" name="_next" value="https://arvihomeschool.com" />
                 <button
                   type="submit"
                   className="w-full bg-blue-600 text-white py-4 rounded-lg font-semibold hover:bg-blue-700 transition-all duration-300 transform hover:scale-105 hover:shadow-lg flex items-center justify-center space-x-2"
