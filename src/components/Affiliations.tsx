@@ -111,7 +111,7 @@ const Affiliations = () => {
             sectionVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
-          <h2 className="text-4xl font-bold text-gray-900 mb-2">Crtifications & Affiliations</h2>
+          <h2 className="text-4xl font-bold text-gray-900 mb-2">Certifications & Affiliations</h2>
           <p className="text-xl text-gray-700 max-w-3xl mx-auto">
             Trust in our professional credentials and commitment to excellence in music education
           </p>
