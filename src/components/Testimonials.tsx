@@ -14,7 +14,7 @@ const Testimonials = () => {
       name: 'Rohan\'s mother',
       role: 'Keyboard student- Beginner',
       image: 'https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=200',
-      text: 'I love the classes which my kid is attending with Arvi school of music. He is getting the freedom to be a good pianist. Arvi school of music is the best. He has very good focus during the sessions and I am very happy because of that. TYSM Arvi. You rock!😆',
+      text: 'I love the classes that my kid is attending with Arvi school of music. He is getting the freedom to be a good pianist. Arvi school of music is the best. He has very good focus during the sessions and I am very happy because of that. TYSM Arvi. You rock!😆',
       rating: 5,
       color: 'blue'
     },
