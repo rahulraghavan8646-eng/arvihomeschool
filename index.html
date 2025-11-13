@@ -32,9 +32,537 @@
     <link rel="apple-touch-icon" href="https://static.wixstatic.com/media/5d6bf1_2dda9171c0194f33a8d9014c68b46ae7~mv2.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Music classes for Homeschoolers in Bangalore by Arvi School of Music</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    
+    <style>
+      html {
+        scroll-behavior: smooth;
+      }
+      
+      .fade-in {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 1s ease-out;
+      }
+      
+      .fade-in.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      
+      .animate-bounce {
+        animation: bounce 1s infinite;
+      }
+      
+      @keyframes bounce {
+        0%, 20%, 53%, 80%, 100% {
+          transform: translate3d(0,0,0);
+        }
+        40%, 43% {
+          transform: translate3d(0,-30px,0);
+        }
+        70% {
+          transform: translate3d(0,-15px,0);
+        }
+        90% {
+          transform: translate3d(0,-4px,0);
+        }
+      }
+    </style>
   </head>
   <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+    <div id="root">
+      <!-- Header -->
+      <header class="fixed top-0 left-0 right-0 bg-white shadow-md z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="flex justify-between items-center h-16">
+            <button onclick="scrollToTop()" class="flex items-center space-x-2 hover:opacity-80 transition-opacity">
+              <img src="https://static.wixstatic.com/media/5d6bf1_2dda9171c0194f33a8d9014c68b46ae7~mv2.png" alt="Arvi School of Music logo" class="w-16 h-16 object-contain">
+              <span class="text-xl font-bold text-gray-900">Arvi School of Music</span>
+            </button>
+            
+            <!-- Desktop Navigation -->
+            <nav class="hidden md:flex space-x-8">
+              <button onclick="scrollToTop()" class="text-gray-700 hover:text-blue-600 transition-colors">Home</button>
+              <button onclick="scrollToSection('instruments')" class="text-gray-700 hover:text-blue-600 transition-colors">Instruments</button>
+              <button onclick="scrollToSection('teacher')" class="text-gray-700 hover:text-blue-600 transition-colors">Teacher</button>
+              <button onclick="scrollToSection('testimonials')" class="text-gray-700 hover:text-blue-600 transition-colors">Testimonials</button>
+              <button onclick="scrollToSection('affiliations')" class="text-gray-700 hover:text-blue-600 transition-colors">Affiliations</button>
+              <button onclick="scrollToSection('contact')" class="text-gray-700 hover:text-blue-600 transition-colors">Contact</button>
+              <button onclick="scrollToSection('contact')" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">Enquire Now</button>
+            </nav>
+
+            <!-- Mobile Menu Button -->
+            <button class="md:hidden" onclick="toggleMobileMenu()">
+              <i data-lucide="menu" class="h-6 w-6" id="menu-icon"></i>
+              <i data-lucide="x" class="h-6 w-6 hidden" id="close-icon"></i>
+            </button>
+          </div>
+
+          <!-- Mobile Navigation -->
+          <div id="mobile-menu" class="md:hidden bg-white border-t hidden">
+            <nav class="py-4 space-y-2">
+              <button onclick="scrollToTop(); toggleMobileMenu()" class="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-50">Home</button>
+              <button onclick="scrollToSection('instruments'); toggleMobileMenu()" class="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-50">Instruments</button>
+              <button onclick="scrollToSection('teacher'); toggleMobileMenu()" class="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-50">Teacher</button>
+              <button onclick="scrollToSection('affiliations'); toggleMobileMenu()" class="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-50">Affiliations</button>
+              <button onclick="scrollToSection('testimonials'); toggleMobileMenu()" class="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-50">Testimonials</button>
+              <button onclick="scrollToSection('contact'); toggleMobileMenu()" class="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-50">Contact</button>
+              <button onclick="scrollToSection('contact'); toggleMobileMenu()" class="block w-full text-left px-4 py-2 bg-blue-600 text-white rounded-lg mx-4 hover:bg-blue-700">Enquire Now</button>
+            </nav>
+          </div>
+        </div>
+      </header>
+
+      <!-- Hero Section -->
+      <section class="pt-16 bg-gradient-to-br from-blue-50 to-indigo-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center fade-in">
+            <div>
+              <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight mb-2">
+                Music Education
+                <span class="block text-blue-600">Designed for</span>
+                <span class="block text-blue-600">Homeschoolers</span>
+              </h1>
+              <p class="mt-4 text-xl text-gray-700 leading-relaxed">
+                We know homeschoolers have immense potential,
+                so we've changed music education for them.
+                We're a breakthrough because we've questioned everything.
+              </p>
+              
+              <div class="mt-6 flex flex-col sm:flex-row gap-4">
+                <button onclick="scrollToSection('contact')" class="bg-blue-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-blue-700 transition-all duration-300 transform hover:scale-105 hover:shadow-lg flex items-center justify-center space-x-2">
+                  <span>Let's go</span>
+                  <i data-lucide="arrow-right" class="h-5 w-5"></i>
+                </button>
+                <button onclick="scrollToSection('instruments')" class="border-2 border-blue-600 text-blue-600 px-8 py-4 rounded-lg font-semibold hover:bg-blue-50 transition-all duration-300 transform hover:scale-105">
+                  Instruments
+                </button>
+              </div>
+
+              <div class="mt-8 grid grid-cols-3 gap-8 fade-in">
+                <div class="text-center">
+                  <div class="flex items-center justify-center w-12 h-12 bg-blue-100 rounded-full mx-auto mb-2 transform hover:scale-110 transition-transform duration-300">
+                    <i data-lucide="clock" class="h-6 w-6 text-blue-600"></i>
+                  </div>
+                  <h3 class="font-semibold text-gray-900">For Homeschoolers</h3>
+                  <p class="text-base text-gray-700">Lessons that adapt to your homeschool vision</p>
+                </div>
+                <div class="text-center">
+                  <div class="flex items-center justify-center w-12 h-12 bg-green-100 rounded-full mx-auto mb-2 transform hover:scale-110 transition-transform duration-300">
+                    <i data-lucide="users" class="h-6 w-6 text-green-600"></i>
+                  </div>
+                  <h3 class="font-semibold text-gray-900">Personalized Learning</h3>
+                  <p class="text-base text-gray-700">Tailored to each student's pace and style</p>
+                </div>
+                <div class="text-center">
+                  <div class="flex items-center justify-center w-12 h-12 bg-orange-100 rounded-full mx-auto mb-2 transform hover:scale-110 transition-transform duration-300">
+                    <i data-lucide="award" class="h-6 w-6 text-orange-600"></i>
+                  </div>
+                  <h3 class="font-semibold text-gray-900">Expert Instruction</h3>
+                  <p class="text-base text-gray-700">A teacher who understands the potential of homeschooling</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="relative fade-in">
+              <div class="aspect-w-4 aspect-h-3 bg-gray-200 rounded-2xl overflow-hidden shadow-2xl transform hover:scale-105 transition-transform duration-500">
+                <img src="https://static.wixstatic.com/media/5d6bf1_2da2116faec74f21ae06998f1f7d92f1~mv2.jpg" alt="Homeschooled students learning music" class="w-full h-full object-cover">
+              </div>
+              <div class="absolute -bottom-6 -left-6 bg-white p-6 rounded-xl shadow-lg">
+                <p class="text-2xl font-bold text-gray-900">Only 10 slots</p>
+                <p class="text-base text-gray-700">Small numbers, big impact, real difference</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Instruments Section -->
+      <section id="instruments" class="py-12 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="text-center mb-8 fade-in">
+            <h2 class="text-4xl font-bold text-gray-900 mb-2">Instruments We Teach</h2>
+            <p class="text-xl text-gray-700 max-w-3xl mx-auto">
+              Discover the perfect musical instrument for your homeschool journey. Our comprehensive 
+              program covers everything from traditional instruments to modern music production.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" id="instruments-grid">
+            <!-- Instruments will be populated by JavaScript -->
+          </div>
+
+          <div class="mt-8 text-center fade-in">
+            <button onclick="scrollToSection('contact')" class="bg-blue-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-blue-700 transition-all duration-300 transform hover:scale-105 hover:shadow-lg">
+              Start Learning Today
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Teacher Section -->
+      <section id="teacher" class="py-12 bg-gradient-to-br from-blue-50 to-indigo-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="text-center mb-2 fade-in">
+            <h2 class="text-4xl font-bold text-gray-900 mb-2">Meet Your Music Teacher</h2>
+            <p class="text-xl text-gray-700 max-w-3xl mx-auto">
+            "A multi-instrumentalist, film composer, with a decade of music experience, and your friend"
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center fade-in">
+            <div class="order-2 lg:order-1">
+              <div class="bg-gradient-to-br from-blue-50 to-indigo-100 rounded-2xl p-8 shadow-lg transform hover:scale-105 transition-transform duration-300">
+                <div class="flex items-center space-x-4 mb-4">
+                  <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center transform hover:rotate-12 transition-transform duration-300">
+                    <i data-lucide="award" class="h-8 w-8 text-blue-600"></i>
+                  </div>
+                  <div>
+                    <h3 class="text-2xl font-bold text-gray-900">Rahul Raghavan</h3>
+                    <p class="text-gray-700">Founder & Homeschool Advocate</p>
+                  </div>
+                </div>
+                
+                <p class="text-gray-700 mb-4 leading-relaxed">
+                  Rahul Raghavan is a Music Director, Educator, Composer, Multi-Instrumentalist, Producer, and Audio Engineer. He composes music for films, documentaries, advertisements, music videos, educational content, short films, and theater. He teaches guitar, keyboard, ukulele, drums, music production, and music theory after mastering all grades in each of them. He can additionally play veena, flute, djembe, handpan, and cajon.
+                  "Our knowledge is usually a drop in the ocean; I've tried to collect as many drops as I can."
+                </p>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+                  <div class="flex items-start space-x-3">
+                    <i data-lucide="book-open" class="h-5 w-5 text-blue-600 mt-1"></i>
+                    <div>
+                      <p class="font-semibold text-gray-900">Achievements</p>
+                      <p class="text-base text-gray-700">Movies, documentaries, short films, educator, sound engineer, and a life dedicated to music</p>
+                    </div>
+                  </div>
+                  <div class="flex items-start space-x-3">
+                    <i data-lucide="users" class="h-5 w-5 text-green-600 mt-1"></i>
+                    <div>
+                      <p class="font-semibold text-gray-900">Experience</p>
+                      <p class="text-base text-gray-700">10+ years of teaching, 500+ students</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="bg-gradient-to-br from-green-50 to-green-100 rounded-lg p-4">
+                  <div class="flex items-start space-x-3">
+                    <i data-lucide="heart" class="h-5 w-5 text-blue-600 mt-1"></i>
+                    <div>
+                      <p class="font-semibold text-gray-900">Teaching Philosophy</p>
+                      <p class="text-base text-gray-700">
+                        "I want my students to have Music as a lifelong friend. My life is dedicated to this pursuit. My students stay in touch long after our classes. I mentor them and they mentor me. Their achievements become my celebrations. That really is hard to beat."
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="order-1 lg:order-2">
+              <div class="aspect-w-4 aspect-h-5 bg-gray-200 rounded-2xl overflow-hidden shadow-lg transform hover:scale-105 transition-transform duration-500">
+                <img src="https://static.wixstatic.com/media/5d6bf1_ae00a71e470a4408b97ab4ad83df6b0d~mv2.jpg" alt="Rahul Raghavan teaching music" class="w-full h-full object-cover">
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-8 text-center">
+            <button onclick="scrollToSection('contact')" class="bg-blue-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-blue-700 transition-all duration-300 transform hover:scale-105 hover:shadow-lg">
+              Start Your Musical Journey
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Testimonials Section -->
+      <section id="testimonials" class="py-12 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="text-center mb-8 fade-in">
+            <h2 class="text-4xl font-bold text-gray-900 mb-2">Testimonials</h2>
+            <p class="text-xl text-gray-700 max-w-3xl mx-auto">
+              Hear from our students and their parents. We thank them for their really kind words. Very encouraging!
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8" id="testimonials-grid">
+            <!-- Testimonials will be populated by JavaScript -->
+          </div>
+
+          <div class="bg-gradient-to-br from-yellow-50 to-yellow-100 rounded-xl p-8 shadow-lg fade-in">
+            <h3 class="text-2xl font-bold text-gray-900 mb-6 text-center">Student Testimonials</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="student-testimonials-grid">
+              <!-- Student testimonials will be populated by JavaScript -->
+            </div>
+          </div>
+
+          <div class="mt-8 text-center">
+            <button onclick="scrollToSection('contact')" class="bg-blue-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-blue-700 transition-all duration-300 transform hover:scale-105 hover:shadow-lg">
+              Join Our Musical Family
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Affiliations Section -->
+      <section id="affiliations" class="py-12 bg-gradient-to-br from-blue-50 to-indigo-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="text-center mb-8 fade-in">
+            <h2 class="text-4xl font-bold text-gray-900 mb-2">Certifications & Affiliations</h2>
+            <p class="text-xl text-gray-700 max-w-3xl mx-auto">
+              Trust in our professional credentials and commitment to excellence in music education
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="affiliations-grid">
+            <!-- Affiliations will be populated by JavaScript -->
+          </div>
+
+          <div class="mt-8 text-center">
+            <button onclick="scrollToSection('contact')" class="bg-blue-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-blue-700 transition-all duration-300 transform hover:scale-105 hover:shadow-lg">
+              Get Certified Today
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Links Section -->
+      <section id="links" class="py-12 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="text-center mb-8 fade-in">
+            <h2 class="text-4xl font-bold text-gray-900 mb-2">Explore More</h2>
+            <p class="text-xl text-gray-700 max-w-3xl mx-auto">
+              Discover additional resources and programs to enhance your musical journey
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="links-grid">
+            <!-- Links will be populated by JavaScript -->
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact Section -->
+      <section id="contact" class="py-12 bg-gradient-to-br from-blue-50 to-indigo-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="text-center mb-8 fade-in">
+            <h2 class="text-4xl font-bold text-gray-900 mb-2">Get In Touch</h2>
+            <p class="text-xl text-gray-700 max-w-3xl mx-auto">
+              Do you think we can make a difference? Call us and find out.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 fade-in">
+            <div>
+              <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-8 shadow-lg mb-6 transform hover:scale-105 transition-transform duration-300">
+                <h3 class="text-2xl font-bold text-gray-900 mb-4">Contact Information</h3>
+                <div class="space-y-4">
+                  <div class="flex items-center space-x-4">
+                    <a href="tel:+917760523376" class="w-12 h-12 bg-gradient-to-br from-blue-100 to-blue-200 rounded-full flex items-center justify-center transform hover:scale-110 transition-transform duration-300 cursor-pointer">
+                      <i data-lucide="phone" class="h-6 w-6 text-blue-600"></i>
+                    </a>
+                    <div>
+                      <p class="font-semibold text-gray-900">Phone</p>
+                      <p class="text-gray-700">+91 77605 23376</p>
+                    </div>
+                  </div>
+                  <div class="flex items-center space-x-4">
+                    <div class="w-12 h-12 bg-gradient-to-br from-green-100 to-green-200 rounded-full flex items-center justify-center transform hover:scale-110 transition-transform duration-300">
+                      <i data-lucide="mail" class="h-6 w-6 text-green-600"></i>
+                    </div>
+                    <div>
+                      <p class="font-semibold text-gray-900">Email</p>
+                      <p class="text-gray-700">arvimusicedu@gmail.com</p>
+                    </div>
+                  </div>
+                  <div class="flex items-center space-x-4">
+                    <div class="w-12 h-12 bg-gradient-to-br from-orange-100 to-orange-200 rounded-full flex items-center justify-center transform hover:scale-110 transition-transform duration-300">
+                      <i data-lucide="map-pin" class="h-6 w-6 text-orange-600"></i>
+                    </div>
+                    <div>
+                      <p class="font-semibold text-gray-900">Location</p>
+                      <p class="text-gray-700">Pipeline Road, MSR Nagar, near New BEL Road</p>
+                      <p class="text-gray-700">near Dollars Colony, near Mathikere</p>
+                      <p class="text-gray-700">near Ramaiah College, Bengaluru, Karnataka, India</p>
+                    </div>
+                  </div>
+                  <div class="flex items-center space-x-4">
+                    <div class="w-12 h-12 bg-gradient-to-br from-purple-100 to-purple-200 rounded-full flex items-center justify-center transform hover:scale-110 transition-transform duration-300">
+                      <i data-lucide="clock" class="h-6 w-6 text-purple-600"></i>
+                    </div>
+                    <div>
+                      <p class="font-semibold text-gray-900">Hours</p>
+                      <p class="text-gray-700 text-base">Monday-Saturday: 9:00 AM - 8:00 PM</p>
+                      <p class="text-gray-700 text-base">Sunday: 12:00 PM - 6:00 PM</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-6">
+                <div class="flex items-start space-x-3">
+                  <i data-lucide="message-circle" class="h-6 w-6 text-blue-600 mt-1"></i>
+                  <div>
+                    <h4 class="font-semibold text-gray-900 mb-2">Response Time</h4>
+                    <p class="text-gray-700">
+                      We typically respond to inquiries within 24 hours. For urgent matters,
+                      please call directly during business hours.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <div class="bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl p-8 shadow-lg transform hover:scale-105 transition-transform duration-300">
+                <h3 class="text-2xl font-bold text-gray-900 mb-6">Leave a message for a callback</h3>
+                <form id="contact-form" action="https://formspree.io/f/xeovqnpy" method="POST" class="space-y-4">
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label class="block text-sm font-medium text-gray-700 mb-1">Parent/Guardian Name *</label>
+                      <input type="text" name="name" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    </div>
+                    <div>
+                      <label class="block text-sm font-medium text-gray-700 mb-1">Email *</label>
+                      <input type="email" name="email" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    </div>
+                  </div>
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label class="block text-sm font-medium text-gray-700 mb-1">Phone Number *</label>
+                      <input type="tel" name="phone" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    </div>
+                    <div>
+                      <label class="block text-sm font-medium text-gray-700 mb-1">Student Age *</label>
+                      <select name="student_age" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        <option value="">Select age</option>
+                        <option value="6-8">6-8 years</option>
+                        <option value="9-12">9-12 years</option>
+                        <option value="13-15">13-15 years</option>
+                        <option value="16-18">16-18 years</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Instrument of Interest *</label>
+                    <select name="instrument" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                      <option value="">Select instrument</option>
+                      <option value="guitar">Guitar</option>
+                      <option value="piano">Piano</option>
+                      <option value="keyboard">Keyboard</option>
+                      <option value="drums">Drums</option>
+                      <option value="ukulele">Ukulele</option>
+                      <option value="music-production">Music Production</option>
+                      <option value="music-theory">Music Theory</option>
+                      <option value="songwriting">Songwriting</option>
+                      <option value="not-sure">Not sure yet</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Additional Message</label>
+                    <textarea name="message" rows="4" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Tell us about your child's musical interests and any questions you have..."></textarea>
+                  </div>
+                  <input type="hidden" name="_subject" value="New inquiry from Arvi Homeschool website">
+                  <input type="hidden" name="_next" value="https://arvihomeschool.com">
+                  <button type="submit" class="w-full bg-blue-600 text-white py-4 rounded-lg font-semibold hover:bg-blue-700 transition-all duration-300 transform hover:scale-105 hover:shadow-lg flex items-center justify-center space-x-2">
+                    <i data-lucide="send" class="h-5 w-5"></i>
+                    <span>Send Message (Or call us)</span>
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-8 fade-in">
+            <h3 class="text-2xl font-bold text-gray-900 mb-6 text-center">Frequently Asked Questions</h3>
+            <div class="max-w-4xl mx-auto space-y-4" id="faq-container">
+              <!-- FAQs will be populated by JavaScript -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer class="bg-gray-900 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div class="col-span-1 md:col-span-2">
+              <button onclick="scrollToTop()" class="flex items-center space-x-2 mb-2 hover:opacity-80 transition-opacity">
+                <img src="https://static.wixstatic.com/media/5d6bf1_2dda9171c0194f33a8d9014c68b46ae7~mv2.png" alt="Arvi School of Music logo" class="w-16 h-16 object-contain">
+                <span class="text-xl font-bold">Arvi School of Music for Homeschoolers</span>
+              </button>
+              <p class="text-gray-400 mb-4 max-w-md">
+                Empowering homeschool families with quality music education that fits their vision. 
+                Expert teacher, personalized instruction, and a passion for nurturing musical talent.
+              </p>
+              <div class="flex space-x-4">
+                <a href="#" class="text-gray-400 hover:text-blue-400 transition-all duration-300 transform hover:scale-110">
+                  <i data-lucide="facebook" class="h-6 w-6"></i>
+                </a>
+                <a href="#" class="text-gray-400 hover:text-blue-400 transition-all duration-300 transform hover:scale-110">
+                  <i data-lucide="instagram" class="h-6 w-6"></i>
+                </a>
+                <a href="#" class="text-gray-400 hover:text-blue-400 transition-all duration-300 transform hover:scale-110">
+                  <i data-lucide="youtube" class="h-6 w-6"></i>
+                </a>
+              </div>
+            </div>
+
+            <div>
+              <h3 class="text-lg font-semibold mb-2">Quick Links</h3>
+              <ul class="space-y-2">
+                <li><button onclick="scrollToSection('instruments')" class="text-gray-300 hover:text-white transition-colors">Instruments</button></li>
+                <li><button onclick="scrollToSection('teacher')" class="text-gray-300 hover:text-white transition-colors">Teacher</button></li>
+                <li><button onclick="scrollToSection('affiliations')" class="text-gray-300 hover:text-white transition-colors">Affiliations</button></li>
+                <li><button onclick="scrollToSection('testimonials')" class="text-gray-300 hover:text-white transition-colors">Testimonials</button></li>
+                <li><button onclick="scrollToSection('contact')" class="text-gray-300 hover:text-white transition-colors">Contact</button></li>
+              </ul>
+            </div>
+
+            <div>
+              <h3 class="text-lg font-semibold mb-2">Contact Info</h3>
+              <div class="space-y-3">
+                <div class="flex items-center space-x-3">
+                  <a href="tel:+917760523376" class="text-blue-400 hover:text-blue-300 transition-colors">
+                    <i data-lucide="phone" class="h-5 w-5"></i>
+                  </a>
+                  <span class="text-gray-300 text-base">+91 77605 23376</span>
+                </div>
+                <div class="flex items-center space-x-3">
+                  <i data-lucide="mail" class="h-5 w-5 text-blue-400"></i>
+                  <span class="text-gray-300 text-base">arvimusicedu@gmail.com</span>
+                </div>
+                <div class="flex items-center space-x-3">
+                  <i data-lucide="map-pin" class="h-5 w-5 text-blue-400"></i>
+                  <span class="text-gray-300 text-base">Bengaluru, Karnataka, India</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="border-t border-gray-800 mt-6 pt-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+              <p class="text-gray-400 text-base mb-2 md:mb-0">© 2024 Arvi School of Music. All rights reserved.</p>
+              <div class="flex space-x-6 text-base text-gray-400">
+                <a href="https://www.arvischool.com/fees#privacy" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-all duration-300 transform hover:scale-105">Privacy Policy</a>
+                <a href="https://www.arvischool.com/fees" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-all duration-300 transform hover:scale-105">Terms of Service</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
+
+      <!-- Back to Top Button -->
+      <button id="back-to-top" onclick="scrollToTop()" class="fixed bottom-6 right-6 bg-blue-600 text-white p-3 rounded-full shadow-lg hover:bg-blue-700 transition-all duration-300 transform hover:scale-110 z-50 animate-bounce hidden" aria-label="Back to top">
+        <i data-lucide="chevron-up" class="h-6 w-6"></i>
+      </button>
+    </div>
+
+    <script src="script.js"></script>
   </body>
 </html>
