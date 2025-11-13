@@ -11,6 +11,11 @@ document.addEventListener('DOMContentLoaded', function() {
   initializeFAQs();
   initializeContactForm();
   initializeBackToTop();
+  
+  // Re-initialize icons after all content is loaded
+  setTimeout(() => {
+    lucide.createIcons();
+  }, 100);
 });
 
 // Scroll animations
@@ -24,7 +29,6 @@ function initializeScrollAnimations() {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
       }
     });
   }, observerOptions);
@@ -32,6 +36,15 @@ function initializeScrollAnimations() {
   document.querySelectorAll('.fade-in').forEach(el => {
     observer.observe(el);
   });
+  
+  // Also observe dynamically added elements
+  setTimeout(() => {
+    document.querySelectorAll('.fade-in').forEach(el => {
+      if (!el.classList.contains('visible')) {
+        observer.observe(el);
+      }
+    });
+  }, 500);
 }
 
 // Navigation functions
